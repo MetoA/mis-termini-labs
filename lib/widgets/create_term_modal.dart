@@ -54,11 +54,16 @@ class _CreateTermModalState extends State<CreateTermModal> {
               child: Align(
             alignment: FractionalOffset.bottomCenter,
             child: ElevatedButton(
-              onPressed: _nameController.text.isEmpty || _dateTime == null ? null : () {
-                var term = Term(id: nanoid(5), name: _nameController.text, dateTime: _dateTime!);
-                widget.onCreate(context, term);
-                Navigator.of(context).pop();
-              },
+              onPressed: _nameController.text.isEmpty || _dateTime == null
+                  ? null
+                  : () {
+                      var term = Term(
+                          id: nanoid(5),
+                          name: _nameController.text,
+                          dateTime: _dateTime!);
+                      widget.onCreate(context, term);
+                      Navigator.of(context).pop();
+                    },
               style: ElevatedButton.styleFrom(
                   elevation: 3, textStyle: const TextStyle(fontSize: 20)),
               child: const Text('Create'),

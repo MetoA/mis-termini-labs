@@ -20,5 +20,6 @@ class TermsPopulatedState extends TermsState {
 
 class TermsErrorState extends TermsState {
   final String error;
+
   TermsErrorState({required this.error}) : super(terms: []);
 }

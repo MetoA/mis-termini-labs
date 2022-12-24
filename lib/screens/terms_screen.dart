@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:termini/blocs/terms_bloc/terms_bloc.dart';
 import 'package:termini/blocs/terms_bloc/terms_state.dart';
 import 'package:termini/models/terms.dart';
+import 'package:termini/screens/login_screen.dart';
 import 'package:termini/widgets/app_bar.dart';
 import 'package:termini/widgets/create_term_modal.dart';
 import 'package:termini/widgets/term_list_tile.dart';
@@ -17,12 +19,17 @@ class TermsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: TermsAppBar(title: 'Terms', onAdd: () => _onAddElement(context)),
+      appBar: TermsAppBar(
+        title: 'Terms',
+        onAdd: () => _onAddElement(context),
+        onLogOut: () => _onLogOut(context),
+      ),
       body: _body(context),
     );
   }
 
   Widget _body(BuildContext context) {
+    BlocProvider.of<TermsBloc>(context).add(TermsInitializedEvent());
     return BlocBuilder<TermsBloc, TermsState>(builder: (context, state) {
       if (state is TermsEmptyState || state is TermsInitialState) {
         return const Center(child: Text('There are currently no terms.'));
@@ -36,23 +43,34 @@ class TermsScreen extends StatelessWidget {
           ),
         );
       } else {
-        return const Center(child: Text('We have encountered an unexpected error'));
+        return const Center(
+            child: Text('We have encountered an unexpected error'));
       }
     });
   }
 
   void _onAddElement(BuildContext context) {
-    showModalBottomSheet(context: context, builder: (_) {
-      return GestureDetector(
-        onTap: () {},
-        behavior: HitTestBehavior.opaque,
-        child: CreateTermModal(onCreate: _onCreateNewTerm,),
-      );
-    });
+    showModalBottomSheet(
+        context: context,
+        builder: (_) {
+          return GestureDetector(
+            onTap: () {},
+            behavior: HitTestBehavior.opaque,
+            child: CreateTermModal(
+              onCreate: _onCreateNewTerm,
+            ),
+          );
+        });
+  }
+
+  void _onLogOut(BuildContext context) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.remove('logged_username');
+    Navigator.of(context)
+        .pushNamedAndRemoveUntil(LoginScreen.route, (route) => false);
   }
 
   void _onCreateNewTerm(BuildContext context, Term term) {
     BlocProvider.of<TermsBloc>(context).add(TermAddedEvent(term: term));
-    print(term);
   }
 }
