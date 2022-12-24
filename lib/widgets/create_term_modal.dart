@@ -34,6 +34,7 @@ class _CreateTermModalState extends State<CreateTermModal> {
                   DatePicker.showDateTimePicker(
                     context,
                     showTitleActions: true,
+                    minTime: DateTime.now(),
                     onConfirm: _onDateSelect,
                     currentTime: _dateTime ?? DateTime.now(),
                   );

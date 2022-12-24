@@ -16,18 +16,13 @@ class TermsBloc extends Bloc<TermsEvent, TermsState> {
       String termsKey = '${prefs.getString('logged_username')}_terms';
 
       if (prefs.containsKey(termsKey)) {
-        _terms = prefs
-            .getStringList(termsKey)!
-            .map((it) => Term.fromJson(jsonDecode(it)))
-            .toList();
+        _terms = prefs.getStringList(termsKey)!.map((it) => Term.fromJson(jsonDecode(it))).toList();
       } else {
         prefs.setStringList(termsKey, []);
         _terms = [];
       }
 
-      var state = _terms.isEmpty
-          ? TermsEmptyState()
-          : TermsPopulatedState(terms: _terms);
+      var state = _terms.isEmpty ? TermsEmptyState() : TermsPopulatedState(terms: _terms);
       state.terms = _terms;
       emit(state);
     });
@@ -35,8 +30,7 @@ class TermsBloc extends Bloc<TermsEvent, TermsState> {
     on<TermAddedEvent>((event, emit) async {
       _terms.add(event.term);
       SharedPreferences prefs = await SharedPreferences.getInstance();
-      prefs.setStringList('${prefs.getString('logged_username')!}_terms',
-          _terms.map((it) => jsonEncode(it)).toList());
+      prefs.setStringList('${prefs.getString('logged_username')!}_terms', _terms.map((it) => jsonEncode(it)).toList());
       emit(TermsPopulatedState(terms: _terms));
     });
 

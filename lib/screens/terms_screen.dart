@@ -3,8 +3,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:termini/blocs/terms_bloc/terms_bloc.dart';
 import 'package:termini/blocs/terms_bloc/terms_state.dart';
+import 'package:termini/extensions/date_extensions.dart';
 import 'package:termini/models/terms.dart';
 import 'package:termini/screens/login_screen.dart';
+import 'package:termini/services/notification_service.dart';
 import 'package:termini/widgets/app_bar.dart';
 import 'package:termini/widgets/create_term_modal.dart';
 import 'package:termini/widgets/term_list_tile.dart';
@@ -13,8 +15,9 @@ import '../blocs/terms_bloc/terms_event.dart';
 
 class TermsScreen extends StatelessWidget {
   static const String route = '/terms-list';
+  final NotificationService _notificationService = NotificationService();
 
-  const TermsScreen({super.key});
+  TermsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -70,7 +73,12 @@ class TermsScreen extends StatelessWidget {
         .pushNamedAndRemoveUntil(LoginScreen.route, (route) => false);
   }
 
-  void _onCreateNewTerm(BuildContext context, Term term) {
+  void _onCreateNewTerm(BuildContext context, Term term) async {
     BlocProvider.of<TermsBloc>(context).add(TermAddedEvent(term: term));
+    await _notificationService.scheduleNotifications(
+        id: term.id,
+        title: term.name,
+        body: 'You have an upcoming term at ${term.dateTime.dateString()}',
+        time: term.dateTime.subtract(const Duration(hours: 1)));
   }
 }
