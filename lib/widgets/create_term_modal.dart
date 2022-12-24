@@ -43,12 +43,9 @@ class _CreateTermModalState extends State<CreateTermModal> {
                   elevation: 3,
                   textStyle: const TextStyle(fontSize: 20),
                 ),
-                child:
-                    Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                   const Icon(Icons.access_time),
-                  Container(
-                      padding: const EdgeInsets.only(left: 10),
-                      child: Text(_dateRepresentation()))
+                  Container(padding: const EdgeInsets.only(left: 10), child: Text(_dateRepresentation()))
                 ]),
               )),
           Expanded(
@@ -58,15 +55,11 @@ class _CreateTermModalState extends State<CreateTermModal> {
               onPressed: _nameController.text.isEmpty || _dateTime == null
                   ? null
                   : () {
-                      var term = Term(
-                          id: nanoid(5),
-                          name: _nameController.text,
-                          dateTime: _dateTime!);
+                      var term = Term(id: nanoid(5), name: _nameController.text, dateTime: _dateTime!);
                       widget.onCreate(context, term);
                       Navigator.of(context).pop();
                     },
-              style: ElevatedButton.styleFrom(
-                  elevation: 3, textStyle: const TextStyle(fontSize: 20)),
+              style: ElevatedButton.styleFrom(elevation: 3, textStyle: const TextStyle(fontSize: 20)),
               child: const Text('Create'),
             ),
           ))

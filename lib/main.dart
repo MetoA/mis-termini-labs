@@ -30,8 +30,7 @@ class MyApp extends StatelessWidget {
         child: MaterialApp(
             title: 'Terms',
             theme: ThemeData(
-              colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.teal)
-                  .copyWith(secondary: Colors.tealAccent),
+              colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.teal).copyWith(secondary: Colors.tealAccent),
             ),
             initialRoute: isLoggedIn ? TermsScreen.route : LoginScreen.route,
             routes: {

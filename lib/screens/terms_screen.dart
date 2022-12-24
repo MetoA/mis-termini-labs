@@ -46,8 +46,7 @@ class TermsScreen extends StatelessWidget {
           ),
         );
       } else {
-        return const Center(
-            child: Text('We have encountered an unexpected error'));
+        return const Center(child: Text('We have encountered an unexpected error'));
       }
     });
   }
@@ -69,8 +68,7 @@ class TermsScreen extends StatelessWidget {
   void _onLogOut(BuildContext context) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.remove('logged_username');
-    Navigator.of(context)
-        .pushNamedAndRemoveUntil(LoginScreen.route, (route) => false);
+    Navigator.of(context).pushNamedAndRemoveUntil(LoginScreen.route, (route) => false);
   }
 
   void _onCreateNewTerm(BuildContext context, Term term) async {

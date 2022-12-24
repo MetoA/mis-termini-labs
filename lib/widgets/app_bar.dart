@@ -5,11 +5,7 @@ class TermsAppBar extends StatelessWidget implements PreferredSizeWidget {
   final Function onAdd;
   final Function onLogOut;
 
-  const TermsAppBar(
-      {super.key,
-      required this.title,
-      required this.onAdd,
-      required this.onLogOut});
+  const TermsAppBar({super.key, required this.title, required this.onAdd, required this.onLogOut});
 
   @override
   Widget build(BuildContext context) {

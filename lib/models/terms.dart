@@ -15,6 +15,5 @@ class Term extends Equatable {
         name = json['name'],
         dateTime = DateTime.parse(json['dateTime']);
 
-  Map<String, dynamic> toJson() =>
-      {'id': id, 'name': name, 'dateTime': dateTime.toString()};
+  Map<String, dynamic> toJson() => {'id': id, 'name': name, 'dateTime': dateTime.toString()};
 }

@@ -33,17 +33,14 @@ class _LoginScreenState extends State<LoginScreen> {
                 });
               },
               decoration: const InputDecoration(
-                  labelText: 'Username',
-                  hintText: 'Enter your existing username or a new one...'),
+                  labelText: 'Username', hintText: 'Enter your existing username or a new one...'),
             ),
             ElevatedButton(
               onPressed: username.isEmpty
                   ? null
                   : () {
-                      _prefs.then((prefs) =>
-                          prefs.setString('logged_username', username));
-                      Navigator.of(context).pushNamedAndRemoveUntil(
-                          TermsScreen.route, (route) => false);
+                      _prefs.then((prefs) => prefs.setString('logged_username', username));
+                      Navigator.of(context).pushNamedAndRemoveUntil(TermsScreen.route, (route) => false);
                     },
               child: const Text('Login'),
             )
