@@ -19,34 +19,41 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Login'),
-      ),
-      body: Center(
-        child: Column(
-          children: [
-            TextField(
-              controller: _usernameController,
-              onChanged: (text) {
-                setState(() {
-                  username = text;
-                });
-              },
-              decoration: const InputDecoration(
-                  labelText: 'Username', hintText: 'Enter your existing username or a new one...'),
-            ),
-            ElevatedButton(
-              onPressed: username.isEmpty
-                  ? null
-                  : () {
-                      _prefs.then((prefs) => prefs.setString('logged_username', username));
-                      Navigator.of(context).pushNamedAndRemoveUntil(TermsScreen.route, (route) => false);
-                    },
-              child: const Text('Login'),
-            )
-          ],
+        appBar: AppBar(
+          title: const Text('Login'),
         ),
-      ),
-    );
+        body: Container(
+          padding: const EdgeInsets.all(20),
+          child: Center(
+            child: Column(
+              children: [
+                TextField(
+                  controller: _usernameController,
+                  onChanged: (text) {
+                    setState(() {
+                      username = text;
+                    });
+                  },
+                  decoration: const InputDecoration(
+                      labelText: 'Username',
+                      hintText: 'Enter your existing username or a new one...'
+                  ),
+                ),
+                Container(
+                  padding: const EdgeInsets.only(top: 20),
+                  child: ElevatedButton(
+                  onPressed: username.isEmpty
+                      ? null
+                      : () {
+                          _prefs.then((prefs) => prefs.setString('logged_username', username));
+                          Navigator.of(context).pushNamedAndRemoveUntil(TermsScreen.route, (route) => false);
+                        },
+                  child: const Text('Login'),
+                )
+                )
+              ],
+            ),
+          ),
+        ));
   }
 }

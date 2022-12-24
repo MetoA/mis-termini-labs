@@ -20,7 +20,7 @@ class _CreateTermModalState extends State<CreateTermModal> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(8),
+      padding: const EdgeInsets.all(20),
       child: Column(
         children: [
           TextField(

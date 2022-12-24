@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:termini/blocs/terms_bloc/terms_bloc.dart';
+import 'package:termini/screens/calendar_screen.dart';
 import 'package:termini/screens/login_screen.dart';
 import 'package:termini/screens/terms_screen.dart';
 import 'package:termini/services/notification_service.dart';
@@ -11,7 +12,6 @@ void main() async {
 
   await NotificationService().init();
   SharedPreferences.getInstance().then((prefs) {
-    prefs.clear();
     bool isLoggedIn = prefs.getString('logged_username') != null;
     runApp(MyApp(isLoggedIn: isLoggedIn));
   });
@@ -35,7 +35,8 @@ class MyApp extends StatelessWidget {
             initialRoute: isLoggedIn ? TermsScreen.route : LoginScreen.route,
             routes: {
               LoginScreen.route: (context) => const LoginScreen(),
-              TermsScreen.route: (context) => TermsScreen()
+              TermsScreen.route: (context) => TermsScreen(),
+              CalendarScreen.route: (context) => const CalendarScreen()
             }));
   }
 }

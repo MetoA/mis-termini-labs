@@ -10,6 +10,12 @@ class Term extends Equatable {
   @override
   List<Object?> get props => [id];
 
+  bool sameDate(DateTime other) {
+    return dateTime.year == other.year &&
+        dateTime.month == other.month &&
+        dateTime.day == other.day;
+  }
+
   Term.fromJson(Map<String, dynamic> json)
       : id = json['id'],
         name = json['name'],
