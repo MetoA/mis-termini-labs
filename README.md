@@ -1,6 +1,7 @@
 # termini
 
 Labs 3, 4, 5 for MIS, 191278
+If you want the maps to work, go to android/app/src/main/AndroidManifest.xml and in the meta-data tag for the api key enter your own.
 
 ## Getting Started
 

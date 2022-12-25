@@ -23,10 +23,10 @@ class TermListTile extends StatelessWidget {
           style: const TextStyle(fontWeight: FontWeight.bold),
         ),
         subtitle: Text(term.dateTime.dateString()),
-        // trailing: IconButton(
-        //   icon: const Icon(Icons.delete),
-        //   onPressed: () => onDelete(context, term.id),
-        // ),
+        trailing: term.location == null ? null : IconButton(
+          icon: const Icon(Icons.pin_drop_rounded),
+          onPressed: () => {},
+        ),
       ),
     );
   }

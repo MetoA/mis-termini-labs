@@ -4,6 +4,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:termini/blocs/terms_bloc/terms_bloc.dart';
 import 'package:termini/screens/calendar_screen.dart';
 import 'package:termini/screens/login_screen.dart';
+import 'package:termini/screens/map_screen.dart';
 import 'package:termini/screens/terms_screen.dart';
 import 'package:termini/services/notification_service.dart';
 
@@ -36,6 +37,7 @@ class MyApp extends StatelessWidget {
             routes: {
               LoginScreen.route: (context) => const LoginScreen(),
               TermsScreen.route: (context) => TermsScreen(),
+              MapScreen.route: (context) => const MapScreen(),
               CalendarScreen.route: (context) => const CalendarScreen()
             }));
   }

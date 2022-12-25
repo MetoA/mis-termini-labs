@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:termini/screens/calendar_screen.dart';
+import 'package:termini/screens/map_screen.dart';
 
 class TermsAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
@@ -14,6 +15,7 @@ class TermsAppBar extends StatelessWidget implements PreferredSizeWidget {
       title: Text(title),
       actions: <Widget>[
         IconButton(onPressed: () => onLogOut(), icon: const Icon(Icons.logout)),
+        IconButton(onPressed: () => _goToMapView(context), icon: const Icon(Icons.map_outlined)),
         IconButton(onPressed: () => _goToCalendarView(context), icon: const Icon(Icons.calendar_month)),
         IconButton(onPressed: () => onAdd(), icon: const Icon(Icons.add))
       ],
@@ -25,5 +27,9 @@ class TermsAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   void _goToCalendarView(BuildContext context) {
     Navigator.of(context).pushNamed(CalendarScreen.route);
+  }
+
+  void _goToMapView(BuildContext context) {
+    Navigator.of(context).pushNamed(MapScreen.route);
   }
 }
